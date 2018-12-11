@@ -17,13 +17,14 @@ export default class Recipe {
       this.ingredients = res.data.recipe.ingredients;
     } catch (error) {
       console.log(error);
+      alert('Something went wrong :(');
     }
   }
 
   calcTime() {
     // Assuming it takes 15 min for every 3 ingredients
     const numIng = this.ingredients.length;
-    const periods = Math.ceil(numImg / 3);
+    const periods = Math.ceil(numIng / 3);
     this.time = periods * 15;
   }
 

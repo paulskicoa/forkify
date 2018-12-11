@@ -67,7 +67,6 @@ const renderButtons = (page, numResults, resPerPage) => {
   if (page === 1 && pages > 1) {
     // First page. Only button to go to next page
     button = createButton(page, 'next');
-
   } else if (page < pages) {
     // Buttons for previous page and next page
     button = (
