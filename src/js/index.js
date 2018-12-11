@@ -1,4 +1,5 @@
 import Search from './models/Search';
+import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
 import { elements, renderLoader, clearLoader } from './views/base';
 
@@ -33,8 +34,27 @@ const controlSearch = async () => {
   }
 };
 
-elements.searchForm.addEventListener('submit', (e) => {
-  // stop automatic page load
-  e.preventDefault();
+const controlRecipe = async () => {
+  // 1) Get ID of clicked recipe
+  const r = new Recipe(46956);
+  await r.getRecipe();
+  console.log(r);
+};
+controlRecipe();
+
+elements.searchForm.addEventListener('submit', (event) => {
+  // Stop automatic page load
+  event.preventDefault();
   controlSearch();
+});
+
+elements.searchResPages.addEventListener('click', (event) => {
+  /* Use closest() so that clicks on the button, svg,
+   * or span all count as clicks on just the button */
+  const btn = event.target.closest('.btn-inline');
+  if (btn) {
+    const goToPage = parseInt(btn.dataset.goto, 10);
+    searchView.clearResults();
+    searchView.renderResults(state.search.result, goToPage);
+  }
 });
